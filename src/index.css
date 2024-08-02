@@ -1,0 +1,27 @@
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: system-ui;
+  margin: 0;
+}
+
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+}
+
+.canvas-container {
+  display: block;
+  width: 50vw;
+  height: 40vh;
+  touch-action: none;
+  border: red 1px dotted;
+
+}
