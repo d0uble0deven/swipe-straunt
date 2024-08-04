@@ -1,17 +1,26 @@
 // src/pages/ItemDetails.js
-import React, { Suspense, useState, useEffect } from "react";
+import React, { Suspense, useState, useEffect, useTransition } from "react";
 
 import { Canvas, useLoader } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
-import { OrbitControls, Html } from "@react-three/drei";
+import { OrbitControls } from "@react-three/drei";
 
 import CardDetails from "./CardDetails";
-import { Slider, Box } from '@mui/material';
+
+// import { Slider, Box } from '@mui/material';
+import { useControls, button } from 'leva'
+
+interface ModelProps {
+    url: string;
+    positionX: number;
+    positionY: number;
+    scale: number;
+  }
 
 function ItemDetails() {
 
-  const [nutritionalFacts, setNutritionalFacts] = useState([]);
+  const [nutritionalFacts, setNutritionalFacts] = useState([{}]);
 
 
 
@@ -53,45 +62,83 @@ function ItemDetails() {
     setNutritionalFacts(nutritionalData);
   }, []);
   
-  let modelPath = "/models/Burger_GLTF/Burger.gltf"
 
-  const marksSauce = [
-    {
-      value: 0,
-      label: "None"
-    },
-    {
-      value: 1,
-      label: "Little"
-    },
-    {
-      value: 2,
-      label: "Regular"
-    },
-    {
-      value: 3,
-      label: "Extra"
-    }
-  ];
+  const [burgerModelUrl, setBurgerModelUrl] = useState('/models/burger.gltf');
+  const [burgerPositionX, setBurgerPositionX] = useState(0);
+  const [burgerPositionY, setBurgerPositionY] = useState(0);
+  const [burgerScale, setBurgerScale] = useState(1);
+  const [isBurgerPending, startBurgerTransition] = useTransition();
 
-  const marksPatties = [
-    {
-      value: 0,
-      label: "Chicken"
-    },
-    {
-      value: 1,
-      label: "Beef"
-    },
-    {
-      value: 2,
-      label: "Fish"
-    },
-    {
-      value: 3,
-      label: "Veggie"
-    }
-  ];
+  useEffect(() => {
+    startBurgerTransition(() => {
+        setBurgerModelUrl('/models/Burger_GLTF/Burger.gltf');
+        setBurgerPositionX(0);
+        setBurgerPositionY(0);
+        setBurgerScale(1);
+    });
+  }, []);
+
+  console.log(isBurgerPending)
+
+//   let modelPath = "/models/Burger_GLTF/Burger.gltf"
+  const gltfLoader = new GLTFLoader();
+  const dracoLoader = new DRACOLoader();
+  dracoLoader.setDecoderPath("/draco/draco-gltf/");
+  gltfLoader.setDRACOLoader(dracoLoader);
+
+//   const model = useLoader(GLTFLoader, modelPath, (loader) => {
+//         loader.setDRACOLoader(dracoLoader);
+// });
+
+const Model: React.FC<ModelProps> = ({ url, positionX, positionY, scale }) => {
+    const model = useLoader(GLTFLoader, url, (loader) => {
+        loader.setDRACOLoader(dracoLoader);
+    });
+    return <primitive object={model.scene} position-x={positionX} position-y={positionY} scale={scale} />;
+  };
+
+  const controls = useControls({ burgerPositionX: 0, burgerPositionY: -1, burgerScale: 1, "Add To Cart": button(() => { console.log('ok') }) })
+  console.log('controls.positionX: ', burgerPositionX)
+  console.log('controls.positionY: ', burgerPositionY)
+  console.log('controls.scale: ', burgerScale)
+
+//   const marksSauce = [
+//     {
+//       value: 0,
+//       label: "None"
+//     },
+//     {
+//       value: 1,
+//       label: "Little"
+//     },
+//     {
+//       value: 2,
+//       label: "Regular"
+//     },
+//     {
+//       value: 3,
+//       label: "Extra"
+//     }
+//   ];
+
+//   const marksPatties = [
+//     {
+//       value: 0,
+//       label: "Chicken"
+//     },
+//     {
+//       value: 1,
+//       label: "Beef"
+//     },
+//     {
+//       value: 2,
+//       label: "Fish"
+//     },
+//     {
+//       value: 3,
+//       label: "Veggie"
+//     }
+//   ];
 
   return (
     <div style={{ padding: "1vh 14vw" }}>
@@ -99,59 +146,31 @@ function ItemDetails() {
         <div className="column1">
           <h1>Hello</h1>
           <div className="canvas-container">
-            <Suspense fallback={<div>Loading model...</div>}>
+                <Suspense fallback={<div>Loading model...</div>}>
               <Canvas>
-              <Html>
-              <h5 style={{ fontFamily: "Arial" }}>BBQ Sauce</h5>
-            <Box sx={{ width: 300 }}>
-                <Slider
-                aria-label="BBQ Sauce"
-                defaultValue={2}
-                valueLabelDisplay="auto"
-                step={1}
-                marks={marksSauce}
-                min={0}
-                max={3}
-                />
-            </Box>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <h5 style={{ fontFamily: "Arial" }}>Patties</h5>
-            <Box sx={{ width: 300 }}>
-                <Slider
-                aria-label="Patties"
-                defaultValue={2}
-                valueLabelDisplay="auto"
-                step={1}
-                marks={marksPatties}
-                min={0}
-                max={3}
-                />
-            </Box>
-                </Html>
-                <ModelLoader modelPath={modelPath} />
+                    <Model url={burgerModelUrl} positionX={controls.burgerPositionX} positionY={controls.burgerPositionY} scale={controls.burgerScale}/>
+                    {/* <primitive object={model.scene} position-x={ positionX } position-y={ positionY } scale={scale} /> */}
+
                 <spotLight
                   position={[10, 10, 10]}
                   angle={0.15}
                   penumbra={1}
                   decay={0}
                   intensity={Math.PI}
-                />
+                  />
                 {/* <pointLight
                   position={[-10, -10, -10]}
                   decay={0}
                   intensity={Math.PI}
-                />{" "} */}
+                  />{" "} */}
                 <OrbitControls />
               </Canvas>
-            </Suspense>
+                  </Suspense>
           </div>
         </div>
         <div className="column2">
           <div className="productDetails-container">
-            <br/>
+            {/* <br/>
             <br/>
             <br/>
             <br/>
@@ -185,7 +204,7 @@ function ItemDetails() {
             </Box>
             <br/>
             <br/>
-            <br/>
+            <br/> */}
             <p>Category: {"item.category"}</p>
             {/* <img src={item.image} alt={item.title} /> */}
             <p>Size: {"item.size"}</p>
@@ -204,34 +223,5 @@ function ItemDetails() {
   );
 }
 
-function ModelLoader({ modelPath }) {
-  const gltfLoader = new GLTFLoader();
-  const dracoLoader = new DRACOLoader();
-  dracoLoader.setDecoderPath("/draco/draco-gltf/");
-  gltfLoader.setDRACOLoader(dracoLoader);
-
-  const model = useLoader(GLTFLoader, modelPath, (loader) => {
-    loader.setDRACOLoader(dracoLoader);
-  });
-
-  console.log("model: ", model);
-
-//   const animations = useAnimations(model.animations, model.scene);
-//   console.log("animations: ", animations);
-//   model.materials["Material.001"].transparent = true;
-//   model.materials["Material.001"].opacity = 0.1;
-//   // model.materials["Material.001"].dithering = true;
-
-//   useEffect(() => {
-//     const action = animations.actions.Burger_explode;
-//     action.play();
-//   });
-
-  return model ? (
-    <primitive object={model.scene} />
-  ) : (
-    <div>Model not found</div>
-  );
-}
 
 export default ItemDetails;
