@@ -19,9 +19,8 @@ body {
 
 .canvas-container {
   display: block;
-  width: 50vw;
-  height: 40vh;
+  width: 100vw;
+  height: 200vh;
   touch-action: none;
-  border: red 1px dotted;
-
+  border: blue 10px double;
 }
