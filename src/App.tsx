@@ -10,7 +10,6 @@ import styles from './styles.module.css';
 
 const pages = [
   // '/videos/11952337_1440_2560_30fps.mp4',
-  // '/videos/testCookingVid.mp4',
   '/videos/friedEggs.mp4',
   '/videos/stirFry.mp4',
   '/videos/openSandwiches.mp4',
