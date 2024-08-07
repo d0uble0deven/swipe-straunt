@@ -20,6 +20,8 @@ const pages = [
   // 'https://images.pexels.com/photos/296878/pexels-photo-296878.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
 ]
 
+// https://swipestraunt-demo.surge.sh/
+
 const getMediaType = (url: string) => {
   const extension = url.split('.').pop()?.toLowerCase();
   console.log('extension: ', extension);

@@ -11,6 +11,12 @@ import CardDetails from "./CardDetails";
 // import { Slider, Box } from '@mui/material';
 import { useControls, button } from 'leva'
 
+
+// const models = [
+//   '/models/Burger_GLTF/Burger.gltf',
+//   '/models/burger.gltf',
+// ]
+
 interface ModelProps {
     url: string;
     positionX: number;
@@ -71,7 +77,10 @@ function ItemDetails() {
 
   useEffect(() => {
     startBurgerTransition(() => {
-        setBurgerModelUrl('/models/Burger_GLTF/Burger.gltf');
+        setBurgerModelUrl('/models/hot_dog.gltf');
+        // setBurgerModelUrl('/models/truck_model.gltf');
+        // setBurgerModelUrl('/models/burger.gltf');
+        // setBurgerModelUrl('/models/Burger_GLTF/Burger.gltf');
         setBurgerPositionX(0);
         setBurgerPositionY(0);
         setBurgerScale(1);
@@ -83,17 +92,26 @@ function ItemDetails() {
 //   let modelPath = "/models/Burger_GLTF/Burger.gltf"
   const gltfLoader = new GLTFLoader();
   const dracoLoader = new DRACOLoader();
-  dracoLoader.setDecoderPath("/draco/draco-gltf/");
+  dracoLoader.setDecoderPath("/draco/");
   gltfLoader.setDRACOLoader(dracoLoader);
 
-//   const model = useLoader(GLTFLoader, modelPath, (loader) => {
-//         loader.setDRACOLoader(dracoLoader);
-// });
-
 const Model: React.FC<ModelProps> = ({ url, positionX, positionY, scale }) => {
-    const model = useLoader(GLTFLoader, url, (loader) => {
-        loader.setDRACOLoader(dracoLoader);
-    });
+
+  console.log('url: ', url)
+  
+  const model = useLoader(GLTFLoader, url, (loader) => {
+    console.log('loader: ', loader)
+    loader.setDRACOLoader(dracoLoader);
+  });
+
+  //  // Use GLTFLoader with DRACOLoader
+  //  const model = useLoader(GLTFLoader, url, loader => {
+  //   (loader as GLTFLoader).setDRACOLoader(dracoLoader);
+  // });
+
+  // const model = useLoader(GLTFLoader, url);
+  console.log('model: ', model)
+  
     return <primitive object={model.scene} position-x={positionX} position-y={positionY} scale={scale} />;
   };
 
@@ -148,7 +166,8 @@ const Model: React.FC<ModelProps> = ({ url, positionX, positionY, scale }) => {
           <div className="canvas-container">
                 <Suspense fallback={<div>Loading model...</div>}>
               <Canvas>
-                    <Model url={burgerModelUrl} positionX={controls.burgerPositionX} positionY={controls.burgerPositionY} scale={controls.burgerScale}/>
+                    {/* <Model url={burgerModelUrl} positionX={controls.burgerPositionX} positionY={controls.burgerPositionY} scale={controls.burgerScale}/> */}
+                    {burgerModelUrl && (<Model url={burgerModelUrl} positionX={controls.burgerPositionX} positionY={controls.burgerPositionY} scale={controls.burgerScale}/>)}
                     {/* <primitive object={model.scene} position-x={ positionX } position-y={ positionY } scale={scale} /> */}
 
                 <spotLight
