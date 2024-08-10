@@ -9,6 +9,10 @@ import ItemDetails from './ItemDetails';
 import styles from './styles.module.css';
 
 const pages = [
+  '/videos/bacon.mp4',
+  '/videos/porkchops.mp4',
+  '/videos/bbqRibs.mp4',
+  '/videos/chicken.mp4',
   '/videos/11952337_1440_2560_30fps.mp4',
   '/videos/openSandwiches.mp4',
   '/videos/friedEggs.mp4',
@@ -54,14 +58,19 @@ const MediaComponent = ({ url }: { url: string }) => {
 
   if (mediaType === 'image') {
     return (
-      <animated.div style={{ width: '120vw', height: '120vh', backgroundImage: `url(${url})`, backgroundSize: 'cover', backgroundPosition: 'bottom 1% right 1%', aspectRatio: "16/9", position: "absolute", bottom: "2vh", right: "85%" }} />
+      <animated.span style={{ width: '100vw', height: '100vh', backgroundImage: `url(${url})`, backgroundSize: 'cover', backgroundPosition: 'bottom 1% right 1%', aspectRatio: "16/9", position: "fixed" }} >
+        <p style={{ fontSize: '15vw', color: 'rgba(255, 255, 255, 0.5)', width: '100%', height: '30%', backgroundColor: 'rgba(50, 50, 73, 0.5)', aspectRatio: "16/9" }}>Chicken</p>
+      </animated.span>
     );
   } else if (mediaType === 'video') {
     return (
-      <animated.video ref={videoRef} style={{ width: '120rm', objectFit: 'cover', objectPosition: 'bottom 1% right 1%', aspectRatio: "16/9", position: "absolute", bottom: "-5%", right: "85%" }} muted autoPlay loop>
-        <source src={url} type="video/mp4" />
-        Your browser does not support the video tag.
-      </animated.video>
+      <animated.span style={{ width: '100vw', height: '100vh', aspectRatio: "16/9" }} >
+        <p style={{ zIndex: '100', fontSize: '15vw', color: 'rgba(255, 255, 255, 0.5)', width: '100%', height: '30%', backgroundColor: 'rgba(50, 50, 73, 0.5)', aspectRatio: "16/9" }}>Pork Chops</p>
+        <video ref={videoRef} style={{ zIndex: '-1', width: '100vw', objectFit: 'cover', objectPosition: 'bottom 1% right 1%', aspectRatio: "16/9", position: "absolute", bottom: "25%" }} muted autoPlay loop>
+          <source src={url} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video> 
+      </animated.span>
     );
   }
 

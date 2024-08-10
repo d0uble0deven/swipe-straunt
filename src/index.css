@@ -4,7 +4,7 @@ body,
   height: 100%;
   width: 100%;
   overflow: hidden;
-  background-color: black;
+  /* background-color: black; */
 }
 
 body {
@@ -23,5 +23,5 @@ body {
   width: 100vw;
   height: 200vh;
   touch-action: none;
-  border: blue 10px double;
+  /* border: blue 10px double; */
 }
