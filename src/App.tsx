@@ -58,7 +58,7 @@ const MediaComponent = ({ url }: { url: string }) => {
     );
   } else if (mediaType === 'video') {
     return (
-      <animated.video ref={videoRef} style={{ width: '120rm', objectFit: 'cover', objectPosition: 'bottom 1% right 1%', aspectRatio: "16/9", position: "absolute", bottom: "5vh", right: "85%" }} muted autoPlay loop>
+      <animated.video ref={videoRef} style={{ width: '120rm', objectFit: 'cover', objectPosition: 'bottom 1% right 1%', aspectRatio: "16/9", position: "absolute", bottom: "-5%", right: "85%" }} muted autoPlay loop>
         <source src={url} type="video/mp4" />
         Your browser does not support the video tag.
       </animated.video>
