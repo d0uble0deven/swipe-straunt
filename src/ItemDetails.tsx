@@ -67,7 +67,7 @@ function ItemDetails() {
   const [burgerModelUrl, setBurgerModelUrl] = useState('/models/burger.gltf')
   const [burgerPositionX, setBurgerPositionX] = useState(0)
   const [burgerPositionY, setBurgerPositionY] = useState(0)
-  const [burgerScale, setBurgerScale] = useState(1)
+  const [burgerScale, setBurgerScale] = useState(3)
   const [cheeseAmount, setCheeseAmount] = useState(1)
   const [pattyAmount, setPattyAmount] = useState(1)
   const [lettuceAmount, setLettuceAmount] = useState(1)
@@ -85,7 +85,7 @@ function ItemDetails() {
       // setBurgerModelUrl('/models/hungry_burger__drawfee__jaiden_fan_art/scene.gltf')
       setBurgerPositionX(0)
       setBurgerPositionY(0)
-      setBurgerScale(1)
+      setBurgerScale(3)
       setCheeseAmount(1)
       setPattyAmount(1)
       setLettuceAmount(1)
@@ -174,7 +174,7 @@ function ItemDetails() {
   const controls = useControls({
     burgerPositionX: 0,
     burgerPositionY: -1,
-    burgerScale: 1,
+    burgerScale: 3,
     cheeseAmount: {
       value: 1, // Default is regular cheese
       min: 0, // No cheese
