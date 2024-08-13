@@ -4,7 +4,7 @@ body,
   height: 100%;
   width: 100%;
   overflow: hidden;
-  /* background-color: black; */
+  background-color: rgb(250, 243, 226);
 }
 
 body {
