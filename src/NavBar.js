@@ -1,5 +1,5 @@
 import React from 'react'
-import { FaFacebookF, FaInstagram, FaEnvelope } from 'react-icons/fa'
+import { FaFacebookF, FaInstagram, FaEnvelope, FaShoppingBasket } from 'react-icons/fa'
 
 const NavBar = () => {
   return (
@@ -25,8 +25,13 @@ const NavBar = () => {
         <a href="mailto:catering@birddogpitbbq.com" target="_blank" rel="noreferrer" style={styles.icon}>
           <FaEnvelope />
         </a>
-        <a href="https://www.doordash.com/store/bird-dog-pit-bbq-austin-29678794/" style={styles.orderButton}>
-          ORDER NOW
+        <a
+          href="https://www.doordash.com/store/bird-dog-pit-bbq-austin-29678794/"
+          target="_blank"
+          rel="noreferrer"
+          style={styles.orderButton}>
+          {/* ORDER NOW */}
+          <FaShoppingBasket />
         </a>
       </div>
     </nav>
