@@ -50,6 +50,8 @@ const styles = {
     position: 'fixed',
     top: '0',
     zIndex: '1000',
+    boxShadow: '0 62.5px 125px -25px rgba(50, 50, 73, 0.5), 0 37.5px 75px -37.5px rgba(0, 0, 0, 0.6)',
+    borderRadius: '.25rem',
   },
   navLeft: {
     display: 'flex',

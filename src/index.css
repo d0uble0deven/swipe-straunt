@@ -25,3 +25,38 @@ body {
   touch-action: none;
   /* border: blue 10px double; */
 }
+
+
+.cardDetails-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.cardDetails-container {
+  border: 0 solid #e5e7eb;
+  width: 14vw;
+  height: 5vh;
+  margin: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  border-radius: .5rem;
+  padding: 1.5rem;
+}
+
+.shadow {
+  box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.1) 0px 1px 2px -1px;
+}
+
+.smallText{
+  font-size: smaller;
+  margin: 0;
+  padding: 0;
+}
+.bigText{
+  font-size: xx-large;
+  margin: 0;
+  padding: 0;
+}

@@ -120,12 +120,14 @@ const MediaComponent = ({ idx }: { idx: any }) => {
           ref={videoRef}
           style={{
             zIndex: '-1',
-            width: '100vw',
+            width: '100%',
             objectFit: 'cover',
             objectPosition: 'bottom 1% right 1%',
             aspectRatio: '16/9',
             position: 'absolute',
             bottom: '25%',
+            borderRadius: '15rem',
+            boxShadow: '0 62.5px 125px -25px rgba(50, 50, 73, 0.5), 0 37.5px 75px -37.5px rgba(0, 0, 0, 0.6)',
           }}
           muted
           autoPlay
