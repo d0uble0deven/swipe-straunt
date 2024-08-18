@@ -7,6 +7,7 @@ import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
 import { OrbitControls } from '@react-three/drei'
 
 import CardDetails from './CardDetails'
+// import MeltShaderMaterial from './shaders/cheeseMelt_Shader' // Assuming you've exported the MeltShaderMaterial as described earlier
 
 // import { Slider, Box } from '@mui/material';
 import { useControls, button } from 'leva'
@@ -78,8 +79,8 @@ function ItemDetails() {
     startBurgerTransition(() => {
       // setBurgerModelUrl('/models/hot_dog.gltf');
       // setBurgerModelUrl('/models/truck_model.gltf');
-      setBurgerModelUrl('/models/burger.gltf')
-      // setBurgerModelUrl('/models/Burger_GLTF/Burger.gltf')
+      // setBurgerModelUrl('/models/burger.gltf')
+      setBurgerModelUrl('/models/Burger_GLTF/Burger.gltf')
       // setBurgerModelUrl('/models/mouthwatering_banana_pancakes_in_syrup.glb')
       // setBurgerModelUrl('/models/hamburger_free/scene.gltf')
       // setBurgerModelUrl('/models/hungry_burger__drawfee__jaiden_fan_art/scene.gltf')
@@ -109,16 +110,47 @@ function ItemDetails() {
     })
 
     // Find the cheese mesh in the model
-    const cheeseMesh = model.scene.children[0].children.find(node => node.name === 'cheese')
+    const cheeseMesh = model.scene.children[0].children[0].children.find(node => node.children[0].name === 'Cheese')
 
     // Find the patty mesh in the model
-    const pattyMesh = model.scene.children[0].children.find(node => node.name === 'patty')
+    const pattyMesh = model.scene.children[0].children[0].children.find(node => node.name === 'Meat')
 
     // Find the lettuce mesh in the model
-    const lettuceMesh = model.scene.children[0].children.find(node => node.name === 'salad')
+    const lettuceMesh = model.scene.children[0].children[0].children.find(node => node.name === 'Lettuce')
 
     // Find the tomato mesh in the model
-    const tomatoMesh = model.scene.children[0].children.find(node => node.name === 'tomato')
+    const tomatoMesh = model.scene.children[0].children[0].children.find(node => node.name === 'Tomato')
+
+    // // Find the cheese mesh in the model
+    // const cheeseMesh = model.scene.children[0].children.find(node => node.name === 'cheese')
+
+    // // Find the patty mesh in the model
+    // const pattyMesh = model.scene.children[0].children.find(node => node.name === 'patty')
+
+    // // Find the lettuce mesh in the model
+    // const lettuceMesh = model.scene.children[0].children.find(node => node.name === 'salad')
+
+    // // Find the tomato mesh in the model
+    // const tomatoMesh = model.scene.children[0].children.find(node => node.name === 'tomato')
+
+    // // Melt the cheese
+    // const cheeseMeshRef: any = useRef()
+    // useEffect(() => {
+    //   if (model && model.scene) {
+    //     const cheeseNode: any = model.scene.children[0].children.find(node => node.name === 'cheese')
+
+    //     if (cheeseNode) {
+    //       cheeseMeshRef.current = cheeseNode
+    //       cheeseNode.material = new MeltShaderMaterial()
+    //     }
+    //   }
+    // }, [model])
+
+    // useFrame(({ clock }) => {
+    //   if (cheeseMeshRef.current) {
+    //     cheeseMeshRef.current.material.uniforms.time.value = clock.getElapsedTime()
+    //   }
+    // })
 
     // Adjust the cheese based on the slider value
     useEffect(() => {
@@ -164,6 +196,7 @@ function ItemDetails() {
         } else {
           tomatoMesh.visible = true // Show the tomato
           tomatoMesh.scale.set(1, controls.tomatoAmount, 1) // Adjust scale for extra tomato
+          // tomatoMesh.scale.set(1.5, controls.tomatoAmount, 1.5) // Adjust scale for extra tomato
         }
       }
     }, [controls.tomatoAmount, tomatoAmount])
@@ -231,9 +264,10 @@ function ItemDetails() {
                     scale={controls.burgerScale}
                   />
                 )}
-                <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} decay={0} intensity={Math.PI} />
-                {/* <spotLight position={[-10, -10, -10]} angle={-0.15} penumbra={1} decay={0} intensity={Math.PI} /> */}
+                <spotLight position={[10, 10, 10]} angle={0.9} penumbra={1} decay={0} intensity={Math.PI} />
+                <spotLight position={[-10, -10, -10]} angle={-0.9} penumbra={1} decay={0} intensity={Math.PI} />
 
+                <ambientLight intensity={100} color={'red'} />
                 <OrbitControls />
               </Canvas>
             </Suspense>

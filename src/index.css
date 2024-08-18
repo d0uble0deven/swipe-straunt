@@ -1,11 +1,25 @@
+@font-face {
+  font-family: 'RetjehDemo-Rough';
+  font-style: normal;
+  font-weight: normal;
+  src: local('RetjehDemo-Rough'), url('RetjehDemo-Rough.woff') format('woff');
+}
+
 html,
 body,
 #root {
   height: 100%;
   width: 100%;
   overflow: hidden;
-  background-color: rgb(250, 243, 226);
+  /* background-color: rgb(250, 243, 226); */
+  background-image: url(/public/images/birddogpitbbq_logo.jpeg);
+  background-position: center;
+  background-repeat: repeat;
+  background-size: cover;
+  font-family: 'RetjehDemo-Rough';
+  /* font-family: 'Retjeh-Demo-Rough'; */
 }
+
 
 body {
   font-family: system-ui;
@@ -59,4 +73,14 @@ body {
   font-size: xx-large;
   margin: 0;
   padding: 0;
+}
+
+
+#leva__root {
+  /* display: none; */
+}
+
+.leva-c-kWgxhW, .leva-c-kWgxhW-bCBHqk-fill-false, .leva-c-kWgxhW-eXrJvq-flat-false, .leva-c-kWgxhW-czBHep-hideTitleBar-false {
+  border: 1px rgb(250, 243, 226) solid;
+
 }

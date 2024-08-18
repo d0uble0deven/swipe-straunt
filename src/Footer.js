@@ -1,11 +1,11 @@
 import React from 'react'
 import { FaFacebookF, FaInstagram, FaEnvelope, FaShoppingBasket } from 'react-icons/fa'
 
-const NavBar = () => {
+const Footer = () => {
   return (
     <nav style={styles.navbar}>
       <div style={styles.navLeft}>
-        {/* <a href="#menu" style={styles.navItem}>
+        <a href="#menu" style={styles.navItem}>
           MENU
         </a>
         <a href="#catering" style={styles.navItem}>
@@ -15,31 +15,7 @@ const NavBar = () => {
           LOCATION & HOURS
         </a>
       </div>
-      <div style={styles.navMiddle}> */}
-        <a href="#menu" style={styles.navItem}>
-          Bird Dog Pit BBQ
-        </a>
-      </div>
-
-      <div style={styles.navRight}>
-        <a href="http://facebook.com/birddogpitbbq" target="_blank" rel="noreferrer" style={styles.icon}>
-          <FaFacebookF />
-        </a>
-        <a href="http://instagram.com/birddogpitbbq" target="_blank" rel="noreferrer" style={styles.icon}>
-          <FaInstagram />
-        </a>
-        <a href="mailto:catering@birddogpitbbq.com" target="_blank" rel="noreferrer" style={styles.icon}>
-          <FaEnvelope />
-        </a>
-        <a
-          href="https://www.doordash.com/store/bird-dog-pit-bbq-austin-29678794/"
-          target="_blank"
-          rel="noreferrer"
-          style={styles.orderButton}>
-          {/* ORDER NOW */}
-          <FaShoppingBasket />
-        </a>
-      </div>
+      <div style={styles.navRight}>Privacy Policy</div>
     </nav>
   )
 }
@@ -54,15 +30,10 @@ const styles = {
     backgroundColor: 'rgb(250, 243, 226)',
     color: 'rgb(186, 81, 38)',
     position: 'fixed',
-    top: '0',
+    bottom: '0',
     zIndex: '1000',
     boxShadow: '0 62.5px 125px -25px rgba(50, 50, 73, 0.5), 0 37.5px 75px -37.5px rgba(0, 0, 0, 0.6)',
     borderRadius: '.25rem',
-  },
-  navMiddle: {
-    // display: 'flex',
-    // justifySelf: 'center',
-    // gap: '40%',
   },
   navLeft: {
     display: 'flex',
@@ -94,4 +65,4 @@ const styles = {
   },
 }
 
-export default NavBar
+export default Footer

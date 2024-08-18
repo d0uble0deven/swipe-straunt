@@ -6,6 +6,7 @@ import clamp from 'lodash.clamp'
 import { useNavigate, BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
 import NavBar from './NavBar'
+import Footer from './Footer'
 import ItemDetails from './ItemDetails'
 import styles from './styles.module.css'
 
@@ -185,6 +186,7 @@ function Viewpager() {
           </animated.div>
         </animated.div>
       ))}
+      <Footer />
     </div>
   )
 }
