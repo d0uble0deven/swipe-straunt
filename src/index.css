@@ -95,9 +95,42 @@ body {
 
 #leva__root {
   /* display: none; */
+  /* background-color: rgb(250, 243, 226); */
+  /* color: red; */
+
 }
 
-.leva-c-kWgxhW, .leva-c-kWgxhW-bCBHqk-fill-false, .leva-c-kWgxhW-eXrJvq-flat-false, .leva-c-kWgxhW-czBHep-hideTitleBar-false {
+.leva-c-kWgxhW, 
+.leva-c-kWgxhW-bCBHqk-fill-false, 
+.leva-c-kWgxhW-eXrJvq-flat-false, 
+.leva-c-kWgxhW-czBHep-hideTitleBar-false, 
+.leva-c-dmsJDs, 
+.leva-c-dmsJDs-lpvxwm-toggled-true, 
+.leva-c-dmsJDs-hXSjjU-isRoot-true {
   border: 1px rgb(250, 243, 226) solid;
+  background-color: rgb(250, 243, 226);  
 
+}
+
+.leva-c-knrmXZ {
+  background-color: rgb(186, 81, 38);
+
+}
+
+/* sliders, inputs */
+.leva-c-kXfPOu, 
+.leva-c-PJLV, 
+.leva-c-gUBGce,
+.leva-c-hwSNBG,
+.leva-c-bbMqub,
+.leva-c-PJLV-gsjcND-hasRange-true, 
+.leva-c-grzFYX {
+  background-color: rgb(250, 243, 226);
+  color: rgb(186, 81, 38);
+}
+
+/* button */
+.leva-c-ihqPFh {
+  background-color: rgb(250, 243, 226);
+  color: rgb(186, 81, 38);
 }
