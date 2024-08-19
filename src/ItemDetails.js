@@ -1,7 +1,7 @@
 // src/pages/ItemDetails.js
 import React, { Suspense, useState, useEffect, useTransition, useRef } from 'react'
 
-import { Canvas, useLoader, useFrame } from '@react-three/fiber'
+import { Canvas, useLoader, useFrame, useThree } from '@react-three/fiber'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
 import { OrbitControls, useAnimations } from '@react-three/drei'
@@ -12,6 +12,8 @@ import NutritionalFactsFooter from './NutritionalFactsFooter'
 
 // import { Slider, Box } from '@mui/material';
 import { useControls, button } from 'leva'
+
+import * as THREE from 'three'
 
 // const models = [
 //   '/models/Burger_GLTF/Burger.gltf',
@@ -79,6 +81,7 @@ function ItemDetails() {
   const [burgerModelUrl, setBurgerModelUrl] = useState('/models/burger.gltf')
   const [burgerPositionX, setBurgerPositionX] = useState(0)
   const [burgerPositionY, setBurgerPositionY] = useState(0)
+  const [burgerPositionZ, setBurgerPositionZ] = useState(0)
   const [burgerScale, setBurgerScale] = useState(3)
   const [cheeseAmount, setCheeseAmount] = useState(1)
   const [pattyAmount, setPattyAmount] = useState(1)
@@ -98,6 +101,7 @@ function ItemDetails() {
       // setBurgerModelUrl('/models/hungry_burger__drawfee__jaiden_fan_art/scene.gltf')
       setBurgerPositionX(0)
       setBurgerPositionY(0)
+      setBurgerPositionZ(0)
       setBurgerScale(3)
       setCheeseAmount(1)
       setPattyAmount(1)
@@ -114,7 +118,7 @@ function ItemDetails() {
   dracoLoader.setDecoderPath('/draco/')
   gltfLoader.setDRACOLoader(dracoLoader)
 
-  const Model = ({ url, positionX, positionY, scale }) => {
+  const Model = ({ url, positionX, positionY, positionZ, scale }) => {
     console.log('url: ', url)
 
     const model = useLoader(GLTFLoader, url, loader => {
@@ -230,12 +234,34 @@ function ItemDetails() {
       }
     }, [animations]) // Only depends on animations, which won't change
 
-    return <primitive object={model.scene} position-x={positionX} position-y={positionY} scale={scale} />
+    useThree(({ camera }) => {
+      console.log('camera: ', camera)
+      camera.position.z = -15
+      // camera.rotation.set(THREE.MathUtils.degToRad(30), 0, 0)
+    })
+
+    // Rotate the model continuously
+    useFrame(() => {
+      if (model.scene) {
+        model.scene.rotation.y += 0.0005 // Adjust the speed as needed
+      }
+    })
+
+    return (
+      <primitive
+        object={model.scene}
+        position-x={positionX}
+        position-y={positionY}
+        position-z={positionZ}
+        scale={scale}
+      />
+    )
   }
 
   const controls = useControls({
     burgerPositionX: 0,
     burgerPositionY: -1,
+    burgerPositionZ: 0,
     burgerScale: 3,
     cheeseAmount: {
       value: 1, // Default is regular cheese
@@ -291,6 +317,7 @@ function ItemDetails() {
                         url={burgerModelUrl}
                         positionX={controls.burgerPositionX}
                         positionY={controls.burgerPositionY}
+                        positionZ={controls.burgerPositionZ}
                         scale={controls.burgerScale}
                       />
                     )}
