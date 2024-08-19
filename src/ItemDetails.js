@@ -1,10 +1,10 @@
 // src/pages/ItemDetails.js
-import React, { Suspense, useState, useEffect, useTransition } from 'react'
+import React, { Suspense, useState, useEffect, useTransition, useRef } from 'react'
 
-import { Canvas, useLoader } from '@react-three/fiber'
+import { Canvas, useLoader, useFrame } from '@react-three/fiber'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
-import { OrbitControls } from '@react-three/drei'
+import { OrbitControls, useAnimations } from '@react-three/drei'
 
 import NutritionalFactsFooter from './NutritionalFactsFooter'
 // import CardDetails from './CardDetails'
@@ -28,6 +28,8 @@ import { useControls, button } from 'leva'
 function ItemDetails() {
   const [nutritionalFacts, setNutritionalFacts] = useState([{}])
   const [showNutritionalFacts, setShowNutritionalFacts] = useState(false)
+
+  const animationPlayedRef = useRef(false)
 
   const nutritionalData = [
     { key: 'Calories', value: '259.3' },
@@ -89,7 +91,8 @@ function ItemDetails() {
       // setBurgerModelUrl('/models/hot_dog.gltf');
       // setBurgerModelUrl('/models/truck_model.gltf');
       // setBurgerModelUrl('/models/burger.gltf')
-      setBurgerModelUrl('/models/Burger_GLTF/Burger.gltf')
+      // setBurgerModelUrl('/models/Burger_GLTF/Burger.gltf')
+      setBurgerModelUrl('/models/BurgerUpdate/Burger_GLTF/burgert.gltf')
       // setBurgerModelUrl('/models/mouthwatering_banana_pancakes_in_syrup.glb')
       // setBurgerModelUrl('/models/hamburger_free/scene.gltf')
       // setBurgerModelUrl('/models/hungry_burger__drawfee__jaiden_fan_art/scene.gltf')
@@ -211,6 +214,21 @@ function ItemDetails() {
         }
       }
     }, [controls.tomatoAmount, tomatoAmount])
+
+    // Animate Burger
+    const animations = useAnimations(model.animations, model.scene)
+    useEffect(() => {
+      if (!animationPlayedRef.current) {
+        const action = animations.actions.Burger_explode
+        action.repetitions = 0
+        action.loop = false
+        action.clampWhenFinished = true
+        action.play()
+
+        // Mark animation as played
+        animationPlayedRef.current = true
+      }
+    }, [animations]) // Only depends on animations, which won't change
 
     return <primitive object={model.scene} position-x={positionX} position-y={positionY} scale={scale} />
   }
