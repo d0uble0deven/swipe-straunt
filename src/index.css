@@ -46,7 +46,13 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  background-color: rgb(250, 243, 226);
+  background-color: white;
+  /* background-color: rgb(250, 243, 226); */
+
+  border: blue 10px double;
+  padding-top: 50vh;
+  padding: 10vh 10vw;
+  margin: 10vh 10vw;
 }
 
 .cardDetails-container {
@@ -60,6 +66,7 @@ body {
   position: relative;
   border-radius: .5rem;
   padding: 1.5rem;
+  border: red 10px double;
 }
 
 .shadow {
@@ -90,6 +97,21 @@ body {
   z-index: 1000;
   box-shadow: 0 62.5px 125px -25px rgba(50, 50, 73, 0.5), 0 37.5px 75px -37.5px rgba(0, 0, 0, 0.6);
   border-radius: .25rem;
+}
+
+.table-container {
+  /* border: red 10px double; */
+  /* padding: 10vh 10vw; */
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Ensure the container takes up the full height of the viewport */
+  padding: 20px;
+  margin: 10% auto;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 

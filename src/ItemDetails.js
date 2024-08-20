@@ -6,7 +6,8 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
 import { OrbitControls, useAnimations } from '@react-three/drei'
 
-import NutritionalFactsFooter from './NutritionalFactsFooter'
+// import NutritionalFactsFooter from './NutritionalFactsFooter'
+import NutritionalFactsTable from './NutritionalFactsTable'
 // import CardDetails from './CardDetails'
 // import MeltShaderMaterial from './shaders/cheeseMelt_Shader' // Assuming you've exported the MeltShaderMaterial as described earlier
 
@@ -34,38 +35,59 @@ function ItemDetails() {
   const animationPlayedRef = useRef(false)
 
   const nutritionalData = [
-    { key: 'Calories', value: '259.3' },
-    { key: 'Total Fat', value: '10.0 g' },
-    { key: 'Saturated Fat', value: '3.5 g' },
-    { key: 'Polyunsaturated Fat', value: '0.2 g' },
-    { key: 'Monounsaturated Fat', value: '1.2 g' },
-    { key: 'Cholesterol', value: '47.2 mg' },
-    { key: 'Sodium', value: '529.6 mg' },
-    { key: 'Potassium', value: '213.4 mg' },
-    { key: 'Total Carbohydrate', value: '27.1 g' },
-    { key: 'Dietary Fiber', value: '4.4 g' },
-    { key: 'Sugars', value: '2.3 g' },
-    { key: 'Protein', value: '17.0 g' },
-    { key: 'Vitamin A', value: '16.3 %' },
-    { key: 'Vitamin B-12', value: '1.0 %' },
-    { key: 'Vitamin B-6', value: '2.4 %' },
-    { key: 'Vitamin C', value: '40.7 %' },
-    { key: 'Vitamin D', value: '0.2 %' },
-    { key: 'Vitamin E', value: '0.8 %' },
-    { key: 'Calcium', value: '5.7 %' },
-    { key: 'Copper', value: '1.0 %' },
-    { key: 'Folate', value: '1.6 %' },
-    { key: 'Iron', value: '14.5 %' },
-    { key: 'Magnesium', value: '1.2 %' },
-    { key: 'Manganese', value: '1.6 %' },
-    { key: 'Niacin', value: '0.7 %' },
-    { key: 'Pantothenic Acid', value: '0.7 %' },
-    { key: 'Phosphorus', value: '4.3 %' },
-    { key: 'Riboflavin', value: '2.1 %' },
-    { key: 'Selenium', value: '1.6 %' },
-    { key: 'Thiamin', value: '1.2 %' },
-    { key: 'Zinc', value: '1.7 %' },
+    { key: 'Calories', value: '303' },
+    { key: 'Total Fat', value: '14 g (21%)' },
+    { key: 'Saturated fat', value: '5 g (25%)' },
+    { key: 'Trans fat regulation', value: '0.7 g' },
+    { key: 'Cholesterol', value: '41 mg (13%)' },
+    { key: 'Sodium', value: '589 mg (24%)' },
+    { key: 'Potassium', value: '190 mg (5%)' },
+    { key: 'Total Carbohydrate', value: '30 g (10%)' },
+    { key: 'Dietary fiber', value: '1 g (4%)' },
+    { key: 'Sugar', value: '5 g' },
+    { key: 'Protein', value: '15 g (30%)' },
   ]
+
+  const nutrientPairs = [
+    { key1: 'Vitamin C', value1: '0%', key2: 'Calcium', value2: '19%' },
+    { key1: 'Iron', value1: '15%', key2: 'Vitamin D', value2: '0%' },
+    { key1: 'Vitamin B6', value1: '5%', key2: 'Cobalamin', value2: '16%' },
+    { key1: 'Magnesium', value1: '5%', key2: '', value2: '' },
+  ]
+
+  // const nutritionalData = [
+  //   { key: 'Calories', value: '259.3' },
+  //   { key: 'Total Fat', value: '10.0 g' },
+  //   { key: 'Saturated Fat', value: '3.5 g' },
+  //   { key: 'Polyunsaturated Fat', value: '0.2 g' },
+  //   { key: 'Monounsaturated Fat', value: '1.2 g' },
+  //   { key: 'Cholesterol', value: '47.2 mg' },
+  //   { key: 'Sodium', value: '529.6 mg' },
+  //   { key: 'Potassium', value: '213.4 mg' },
+  //   { key: 'Total Carbohydrate', value: '27.1 g' },
+  //   { key: 'Dietary Fiber', value: '4.4 g' },
+  //   { key: 'Sugars', value: '2.3 g' },
+  //   { key: 'Protein', value: '17.0 g' },
+  //   { key: 'Vitamin A', value: '16.3 %' },
+  //   { key: 'Vitamin B-12', value: '1.0 %' },
+  //   { key: 'Vitamin B-6', value: '2.4 %' },
+  //   { key: 'Vitamin C', value: '40.7 %' },
+  //   { key: 'Vitamin D', value: '0.2 %' },
+  //   { key: 'Vitamin E', value: '0.8 %' },
+  //   { key: 'Calcium', value: '5.7 %' },
+  //   { key: 'Copper', value: '1.0 %' },
+  //   { key: 'Folate', value: '1.6 %' },
+  //   { key: 'Iron', value: '14.5 %' },
+  //   { key: 'Magnesium', value: '1.2 %' },
+  //   { key: 'Manganese', value: '1.6 %' },
+  //   { key: 'Niacin', value: '0.7 %' },
+  //   { key: 'Pantothenic Acid', value: '0.7 %' },
+  //   { key: 'Phosphorus', value: '4.3 %' },
+  //   { key: 'Riboflavin', value: '2.1 %' },
+  //   { key: 'Selenium', value: '1.6 %' },
+  //   { key: 'Thiamin', value: '1.2 %' },
+  //   { key: 'Zinc', value: '1.7 %' },
+  // ]
 
   useEffect(() => {
     setNutritionalFacts(nutritionalData)
@@ -334,11 +356,19 @@ function ItemDetails() {
               </button>
               <div>
                 {showNutritionalFacts && (
+                  <div className="table-container">
+                    <NutritionalFactsTable />
+                    {/* <NutritionalFactsTable nutritionalFacts={nutritionalFacts} nutrientPairs={nutrientPairs} /> */}
+                  </div>
+                )}
+              </div>
+              {/* <div>
+                {showNutritionalFacts && (
                   <div>
                     <NutritionalFactsFooter nutritionalFacts={nutritionalFacts} />
                   </div>
                 )}
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
